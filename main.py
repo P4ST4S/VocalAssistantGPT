@@ -1,18 +1,4 @@
-import time
-import threading
-import openai
-import pyttsx3
-import json
-import speech_recognition as sr
-from pydub.generators import Sine
-from pydub.playback import play
-from current_time import get_current_time
-from weather import get_current_weather
-from functions_data import FUNCTIONS
-
-
-# You need to create a file named api_key.py and put your OpenAI API key and your OpenWeather API key in it.
-from api_key import api_key_openai
+from include.include import *
 
 
 personality = [{"role": "system",

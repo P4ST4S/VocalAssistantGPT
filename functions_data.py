@@ -4,12 +4,7 @@ FUNCTIONS = [
         "description": "Get the current time",
         "parameters": {
             "type": "object",
-            "properties": {
-                "time": {
-                    "type": "string",
-                    "description": "Get the current time",
-                },
-            },
+            "properties": {},
             "required": []
         }
     },

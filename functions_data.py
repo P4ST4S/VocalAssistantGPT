@@ -15,7 +15,8 @@ FUNCTIONS = [
     },
     {
         "name": "get_current_weather",
-        "description": "Get the current weather",
+        "description": "Get the current weather. Transform '.' (point) into ',' (comma) in your response. "
+                       "Don't tell abbreviation like 'hPa' or 'h'. but 'hectopascal' or 'kilometer per hour'.",
         "parameters": {
             "type": "object",
             "properties": {

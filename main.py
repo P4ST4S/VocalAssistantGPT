@@ -102,14 +102,19 @@ def listen_user():
 
 
 def run_assistant():
-    print_and_speak("Bonjour, je suis Voxia, votre assistant vocal. Demandez-moi ce que vous voulez.")
+    response = get_gpt_response("Bonjour")
+    print("Assistant: " + response)
+    speak_response(response)
+
     while True:
         user_input = listen_user()
+
         if "au revoir" in user_input.lower():
             response = get_gpt_response(user_input)
             print("Assistant: " + response)
             speak_response(response)
             break
+
         response = get_gpt_response(user_input)
         print("Assistant: " + response)
         speak_response(response)

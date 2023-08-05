@@ -69,6 +69,8 @@ def print_and_speak(text):
 
 
 def listen_user():
+    print("Vous:\t\t", end="", flush=True)
+
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
         play_beep()
@@ -76,7 +78,7 @@ def listen_user():
 
     try:
         user_input = recognizer.recognize_google(audio, language="fr-FR")
-        print("Vous:\t\t" + user_input)
+        print(user_input)
         return user_input
     except sr.UnknownValueError:
         print_and_speak("Désolé, je n'ai pas compris.")

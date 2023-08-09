@@ -82,6 +82,7 @@ def print_and_speak(text):
 
 def listen_user():
     print("Vous:\t\t", end="", flush=True)
+
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
         play_beep()

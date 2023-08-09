@@ -7,7 +7,8 @@ import speech_recognition as sr
 from pydub.generators import Sine
 from pydub.playback import play
 from include.current_time import get_current_time
-from include.weather import get_current_weather, get_forecast_weather
+from include.weather import get_forecast_weather
+from include.news import get_news
 from include.functions_data import FUNCTIONS
 
 from include.api_key import api_key_openai
@@ -46,8 +47,8 @@ def get_gpt_response(question):
     if response_msg.get("function_call"):
         available_functions = {
             "get_current_time": get_current_time,
-            "get_current_weather": get_current_weather,
-            "get_forecast_weather": get_forecast_weather
+            "get_forecast_weather": get_forecast_weather,
+            "get_news": get_news
         }
         function_name = response_msg["function_call"]["name"]
         function_to_call = available_functions[function_name]
@@ -81,7 +82,7 @@ def print_and_speak(text):
 
 
 def listen_user():
-    print("Vous:\t\t", end="", flush=True)
+    print("\nVous:\t\t", end="", flush=True)
 
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
@@ -93,10 +94,10 @@ def listen_user():
         print(user_input)
         return user_input
     except sr.UnknownValueError:
-        print_and_speak("Désolé, je n'ai pas compris.")
+        print_and_speak("\nDésolé, je n'ai pas compris.")
         return listen_user()
     except sr.RequestError:
-        print_and_speak("Désolé, je ne peux pas vous entendre.")
+        print_and_speak("\nDésolé, je ne peux pas vous entendre.")
         return listen_user()
 
 

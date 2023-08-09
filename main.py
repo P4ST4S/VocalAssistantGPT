@@ -1,5 +1,16 @@
-from include.include import *
+import time
+import threading
+import openai
+import pyttsx3
+import json
+import speech_recognition as sr
+from pydub.generators import Sine
+from pydub.playback import play
+from include.current_time import get_current_time
+from include.weather import get_current_weather, get_forecast_weather
+from include.functions_data import FUNCTIONS
 
+from include.api_key import api_key_openai
 
 personality = [{"role": "system",
                 "content": "You are a helpful vocal assistant who talk with a user who may need you. Your name is "
@@ -35,7 +46,8 @@ def get_gpt_response(question):
     if response_msg.get("function_call"):
         available_functions = {
             "get_current_time": get_current_time,
-            "get_current_weather": get_current_weather
+            "get_current_weather": get_current_weather,
+            "get_forecast_weather": get_forecast_weather
         }
         function_name = response_msg["function_call"]["name"]
         function_to_call = available_functions[function_name]
@@ -69,6 +81,7 @@ def print_and_speak(text):
 
 
 def listen_user():
+    print("Vous:\t\t", end="", flush=True)
     recognizer = sr.Recognizer()
     with sr.Microphone() as source:
         play_beep()
@@ -76,7 +89,7 @@ def listen_user():
 
     try:
         user_input = recognizer.recognize_google(audio, language="fr-FR")
-        print("Vous:\t\t" + user_input)
+        print(user_input)
         return user_input
     except sr.UnknownValueError:
         print_and_speak("Désolé, je n'ai pas compris.")
